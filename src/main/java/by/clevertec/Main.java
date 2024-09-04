@@ -12,12 +12,11 @@ import by.clevertec.util.Util;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
-import java.util.concurrent.Flow;
 import java.util.stream.Collectors;
 
 public class Main {
-    private final static String FEMALE = "Female";
-    private final static String MALE = "Male";
+    private static final  String FEMALE = "Female";
+    private static final  String MALE = "Male";
 
     public static void main(String[] args) {
         task1();
@@ -43,7 +42,8 @@ public class Main {
         task21();
         task22();
     }
-    private static int getAge(Person person){
+
+    private static int getAge(Person person) {
         return Period.between(person.getDateOfBirth(), LocalDate.now()).getYears();
     }
 
@@ -203,7 +203,6 @@ public class Main {
     }
 
 
-
     public static void task14() {
         List<Car> cars = Util.getCars();
 //        cars.stream() Продолжить ...
@@ -252,7 +251,8 @@ public class Main {
         System.out.println("CarsSum = " + CarsSum);
 
     }
-    private static double CarsSum(List<Car> cars){
+
+    private static double CarsSum(List<Car> cars) {
         return cars.stream()
                 .mapToDouble(Car::getPrice)
                 .sum();
@@ -313,17 +313,17 @@ public class Main {
 
     }
 
-    public static void task19() {
+    public static void task19() throws RuntimeException {
         List<Student> students = Util.getStudents();
         List<Examination> examinations = Util.getExaminations();
         Set<String> groups = students.stream()
                 .map(Student::getGroup)
                 .collect(Collectors.toSet());
-        try(Scanner scanner = new Scanner(System.in)) {
+        try (Scanner scanner = new Scanner(System.in)) {
             String targetGroup = scanner.next();
 //        students.stream() Продолжить ...
             if (targetGroup != null) {
-                if(groups.contains(targetGroup)) {
+                if (groups.contains(targetGroup)) {
                     List<Student> StudentsExamBetter4 = students.stream()
                             .filter(student -> student.getGroup().equals(targetGroup))
                             .filter(student -> examinations.stream()
@@ -331,7 +331,7 @@ public class Main {
                                             examination.getExam3() > 4))
                             .collect(Collectors.toList());
                     System.out.println("collect = " + StudentsExamBetter4);
-                }else{
+                } else {
                     throw new RuntimeException("targetGroup not in Groups Set");
                 }
             } else {
